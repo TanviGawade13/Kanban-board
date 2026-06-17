@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">Kanban Board</div>
+        <div class="nav-actions">
+            <button id="add-list-btn">+ Add List</button>
+        </div>
+    </nav>
+
+    <!-- BOARD — JS builds everything inside here -->
+    <div id="lists-container"></div>
+
+    <!-- MODAL — for adding a card -->
+    <div class="modal" id="card-modal">
+        <div class="modal-bg" id="modal-bg"></div>
+        <div class="modal-box">
+            <h2>Add New Card</h2>
+            <input type="text" id="card-title-input" placeholder="Card title" />
+            <textarea id="card-desc-input" placeholder="Description (optional)" rows="3"></textarea>
+            <div class="modal-actions">
+                <button id="modal-cancel-btn">Cancel</button>
+                <button class="btn-accent" id="modal-confirm-btn">Add Card</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

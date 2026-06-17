@@ -1,0 +1,318 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #0b0b0b;
+    --primary-text: #f5f5f5;
+    --bg-button-color: #1e1e1e;
+    --bg-task-color: #2a2a2a;
+    --bg-card-color: #333333;
+    --delete-color: #d9534f;
+    --accent-color: #4f8ef7;
+    --border-color: #2e2e2e;
+    --muted-text: #aaaaaa;
+    --padding-s: 5px;
+    --padding-m: 10px;
+    --padding-l: 15px;
+    --padding-xxl: 30px;
+    --border-radius-m: 8px;
+    --border-radius-l: 12px;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--primary-text);
+}
+
+/* ---- NAVBAR ---- */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--bg-color);
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+}
+
+nav .logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+nav .nav-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* ---- BUTTONS ---- */
+button {
+    background-color: var(--bg-button-color);
+    border: 1px solid var(--border-color);
+    color: var(--primary-text);
+    padding: var(--padding-m) var(--padding-l);
+    cursor: pointer;
+    border-radius: var(--border-radius-m);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: opacity 0.2s;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.btn-accent {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: white;
+}
+
+.btn-danger {
+    background-color: var(--delete-color);
+    border-color: var(--delete-color);
+    color: white;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+}
+
+.btn-ghost {
+    background-color: transparent;
+    border: 1px dashed var(--border-color);
+    color: var(--muted-text);
+    width: 100%;
+    margin-top: var(--padding-m);
+    text-align: center;
+}
+
+.btn-ghost:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    opacity: 1;
+}
+
+/* ---- BOARD ---- */
+#lists-container {
+    padding: var(--padding-xxl);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    overflow-x: auto;
+    min-height: calc(100vh - 61px);
+}
+
+/* ---- LIST COLUMN ---- */
+.list-column {
+    background-color: var(--bg-task-color);
+    min-width: 280px;
+    max-width: 280px;
+    border-radius: var(--border-radius-l);
+    padding: var(--padding-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-m);
+    border: 1px solid var(--border-color);
+}
+
+.list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--padding-m);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.list-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.list-count {
+    background-color: var(--bg-button-color);
+    color: var(--muted-text);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+
+.list-delete-btn {
+    background: transparent;
+    border: none;
+    color: var(--muted-text);
+    font-size: 1.1rem;
+    padding: 2px 6px;
+    cursor: pointer;
+}
+
+.list-delete-btn:hover {
+    color: var(--delete-color);
+    opacity: 1;
+}
+
+/* ---- CARDS CONTAINER ---- */
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-m);
+    min-height: 10px;
+}
+
+/* ---- CARD ---- */
+.card {
+    background-color: var(--bg-card-color);
+    padding: var(--padding-l);
+    border-radius: var(--border-radius-m);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-s);
+    cursor: grab;
+    border: 1px solid transparent;
+    transition: border-color 0.2s, transform 0.15s;
+}
+
+.card:hover {
+    border-color: var(--accent-color);
+}
+
+.card:active {
+    cursor: grabbing;
+}
+
+.card.dragging {
+    opacity: 0.4;
+    transform: scale(0.98);
+}
+
+.card-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.card-description {
+    font-size: 0.82rem;
+    color: var(--muted-text);
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+/* ---- DRAG HIGHLIGHT ---- */
+.list-column.drag-over {
+    border-color: var(--accent-color);
+    border-style: dashed;
+}
+
+/* ---- ADD LIST BUTTON ---- */
+#add-list-btn {
+    min-width: 260px;
+    height: fit-content;
+    background-color: transparent;
+    border: 2px dashed var(--border-color);
+    color: var(--muted-text);
+    padding: var(--padding-l);
+    border-radius: var(--border-radius-l);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#add-list-btn:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    opacity: 1;
+}
+
+/* ---- MODAL ---- */
+.modal {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-bg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+.modal-box {
+    position: relative;
+    z-index: 101;
+    background-color: var(--bg-task-color);
+    border: 1px solid var(--border-color);
+    padding: var(--padding-xxl);
+    border-radius: var(--border-radius-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-l);
+    width: 420px;
+    max-width: 90%;
+}
+
+.modal-box h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.modal-box input,
+.modal-box textarea,
+.modal-box select {
+    width: 100%;
+    padding: var(--padding-m);
+    background: #111;
+    border: 1px solid #444;
+    color: white;
+    border-radius: var(--border-radius-m);
+    outline: none;
+    font-size: 0.9rem;
+    font-family: inherit;
+}
+
+.modal-box textarea {
+    resize: vertical;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+/* ---- SCROLLBAR ---- */
+::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 10px;
+}
